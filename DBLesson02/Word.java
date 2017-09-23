@@ -26,6 +26,6 @@ public class Word{
 	}
 
 	public void setJapanese(String japanese){
-		this.english = japanese;
+		this.japanese = japanese;
 	}
 }
