@@ -22,7 +22,7 @@ public class DBLesson02{
 			input = sc.nextLine();
 		}
 		int count = wdao.registWords(words);
-		System.out.println(count + "件の登録が完了しました。\n");
+		System.out.println(count + "件の登録が完了しました。");
 
 		List<Word> wList = new ArrayList<>();
 		wList = wdao.getWords();
