@@ -13,21 +13,22 @@ public class WordDAO {
 	PreparedStatement st = null;
 	ResultSet rs = null;
 
-	static String URL = "jdbc:postgrespl:axizdb";
-	static String USER = "axizuser";
-	static String PW = "axiz";
+	static String URL = "jdbc:mysql://localhost/testdb?useUnicode=true&characterEncoding=utf8";
+	static String USER = "root";
+	static String PW = "";
 
 	public int registWords(List<Word> words) {
 		int result = 0;
 		try {
 			String SQL ="INSERT INTO dictionary VALUE (?, ?)";
-			Class.forName("org.postgresql.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(URL, USER, PW);
+			//st = con.prepareStatement(SQL);
 
 			for (Word tmp : words) {
 					st = con.prepareStatement(SQL);
 					st.setString(1, tmp.getEnglish());
-					st.setString(1, tmp.getJapanese());
+					st.setString(2, tmp.getJapanese());
 					st.executeUpdate();
 					result++;
 			}
@@ -59,10 +60,9 @@ public class WordDAO {
 public List<Word> getWords() {
 	List<Word> words = new ArrayList<>();
 	try{
-		String SQL = "SELECT english, japanese FORM dinctionary";
-		Class.forName("org.postgrespl.Driver");
+		String SQL = "SELECT english, japanese FROM dictionary";
+		Class.forName("com.mysql.jdbc.Driver");
 		con = DriverManager.getConnection(URL, USER, PW);
-
 		st = con.prepareStatement(SQL);
 		rs = st.executeQuery();
 
